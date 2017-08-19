@@ -1,15 +1,28 @@
 import $ from "zepto";
-const Handlebars = require("handlebars/runtime");
+require("./handlebarHelpers");
 
-Handlebars.registerHelper("math", function(op1, operator, op2) {
-    op1 = parseFloat(op1);
-    op2 = parseFloat(op2);
+function renderSaveSessionTab() {
+    renderSaveSessionContainer();
+    renderSessionInfo();
+}
 
-    return {
-        "+": op1 + op2,
-        "-": op1 - op2
-    }[operator];
-});
+function renderSaveSessionContainer() {
+    let template = require("../templates/saveSession.handlebars");
+    $("#main").html(template());
+    $("form#saveSessionForm").submit(handleSaveSession);
+}
+
+function handleSaveSession(evt) {
+    console.log("Saving Session...");
+    evt.preventDefault();
+}
+
+function renderSessionInfo() {
+    getWindowsList().then((windowList) => {
+        console.log(windowList);
+        $("ul.windowAndTabList").html(renderWindowAndTabList(windowList));
+    });
+}
 
 function getWindowsList() {
     return new Promise((resolve, reject) => {
@@ -21,23 +34,20 @@ function getWindowsList() {
     });
 }
 
-function preprocessWindowList(windowList) {
-    return {
-        "windows": windowList
-    };
-}
-
 function renderWindowAndTabList(windowList) {
     windowList = preprocessWindowList(windowList);
     let template = require("../templates/windowsAndTabsList.handlebars");
     return template(windowList);
 }
 
+function preprocessWindowList(windowList) {
+    return {
+        "windows": windowList
+    };
+}
+
 function start() {
-    getWindowsList().then((windowList) => {
-        console.log(windowList);
-        $("ul.windowAndTabList").html(renderWindowAndTabList(windowList));
-    });
+    renderSaveSessionTab();
 }
 
 start();

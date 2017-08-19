@@ -1,4 +1,4 @@
-# sessionManager
+# SessionManager
 Chrome Extension to save, restore and manage browsing sessions
 
 # How to use the Extension?
