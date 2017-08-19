@@ -1,0 +1,14 @@
+{
+  "manifest_version": 2,
+  "name": "Session Manager",
+  "version": "1.0.0",
+
+  "description": "Session Manager for Chrome",
+
+  "browser_action": {
+    "default_icon": "assets/icon.png",
+    "default_popup": "popup.html"
+  },
+
+  "permissions": ["tabs"]
+}

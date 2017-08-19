@@ -1,0 +1,17 @@
+{{#windows}}
+<li class="windowEntry">
+    <h2>Window #{{math @index "+" 1}}</h2>
+    <ul class="tabList">
+        {{#tabs}}
+            <li>
+                {{#if favIconUrl}}
+                    <img class="favicon" src="{{ favIconUrl }}" alt=""/>
+                {{else}}
+                    <img class="favicon" />
+                {{/if}}
+                <span title="{{ title }}">{{ title }}</span>
+            </li>
+        {{/tabs}}
+    </ul>
+</li>
+{{/windows}}
